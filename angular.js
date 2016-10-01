@@ -3,18 +3,27 @@ var ang= /**
 *
 * Description
 */
-angular.module('myapp', []);
+angular.module('myapp', ['ngStorage']);
 
-ang.controller('myCtrl',  function($scope,myfact,localstore){
+ang.controller('myCtrl',   function(
+    $scope,
+    $localStorage,
+    localstore,
+    myfact,
+    $sessionStorage
+){
 	$scope.localstore = localstore;
 	$scope.myfact = myfact;
+	$scope.storage = $localStorage;
+	console.log('storage', $scope.storage.name);
 	$scope.addEvent = function(event){
 		localstore.store.push(event);
 		console.log(localstore.store);
-		$scope.todo=null;
-	}
-	
+		$scope.todo=null;}
 });
+
+	
+
 
 ang.directive('myInput',  function(){
 	// Runs during compile
