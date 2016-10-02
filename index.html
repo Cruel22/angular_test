@@ -5,7 +5,7 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	<script src="node_modules/ngstorage/ngStorage.min.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
 	<script src="angular.js"></script>
 </head>
 <body ng-app="myapp">
@@ -14,10 +14,10 @@
 		<span>
 			todo
 		</span>
-			<form>
-				<input type="text" ng-model="todo" my-input>
+			<form ng-submit="myCtrl.addEvent()">
+				<input type="text" ng-model="myCtrl.todo" >
 				<div>
-					{{todo}}
+					{{myCtrl.todo}}
 				</div>
 			</form>
 		</div>

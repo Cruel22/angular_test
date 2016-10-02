@@ -8,18 +8,13 @@ angular.module('myapp', ['ngStorage']);
 ang.controller('myCtrl',   function(
     $scope,
     $localStorage,
-    localstore,
     myfact,
     $sessionStorage
 ){
-	$scope.localstore = localstore;
 	$scope.myfact = myfact;
 	$scope.storage = $localStorage;
-	console.log('storage', $scope.storage.name);
-	$scope.addEvent = function(event){
-		localstore.store.push(event);
-		console.log(localstore.store);
-		$scope.todo=null;}
+	this.addEvent = myfact.addEvent(this.todo);
+	
 });
 
 	
@@ -47,7 +42,7 @@ ang.directive('myInput',  function(){
 			element.bind("keydown keypress", function (event) {
             if(event.which === 13) {
                 scope.$apply(function (){
-                	scope.addEvent(scope.todo);
+                	myCtrl.addEvent();
                 });
 
                 event.preventDefault();
@@ -58,33 +53,10 @@ ang.directive('myInput',  function(){
 });
 
 ang.factory('myfact',  function(){
-	return {
-		mem: {
-			test: function(){
-				return 'qqq';
-			},
-			create: function(qwe){
-				console.log(localstore);
-			}
-		},
-		store: {
-			name: '1',
-			status: "complete"
-		}
-	};
+	var logic = {};
+	logic.addEvent = function ( ) {
+		console.log('Add Event function');
+	}
+	return logic;
 })
 
-ang.factory('localstore', function(){
-	return {
-		store: [
-			{
-				name:'',
-				id:1
-			},
-			{
-				name:'',
-				id:2
-			}
-		]
-	};
-})
