@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="ang.js"></script>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="bower_components/ngstorage/ngStorage.min.js"></script>
+	<script src="angular.js"></script>
 </head>
-<body ng-app='myAng'>
-   {{3+1}}
-   <!--  <header>
-        <div class="menu-downc" data-up="false" data-reverse="true">
-           menu button
-            <div class="menu-items">
-                <a href="">qwe1</a>
-                <a href="">qwe2</a>
-                <a href="">qwe3</a>
-                <a href="">qwe</a>
-            </div>
-        </div>
-    </header> -->
-    
-    <div ng-controller = 'myCont'>
-        {{test}}
-        <input type="text" ng-model="model"> {{factory.Keyword}}
-        <br>
-        {{func(33)}}
-        {{factory.Keyword}}
-    </div>
-<!-- <script src="script.js"></script> -->    
+<body ng-app="myapp">
+	<div ng-controller="myCtrl as myCtrl">
+		<div class="mainForm">
+		<span>
+			todo
+		</span>
+			<form ng-submit="myCtrl.addEvent()">
+				<input type="text" ng-model="myCtrl.todo" >
+				<div>
+					{{myCtrl.todo}}
+				</div>
+			</form>
+		</div>
+	</div>
+
 </body>
 </html>
