@@ -1,0 +1,20 @@
+{
+  "name": "bower.json",
+  "homepage": "https://github.com/Cruel22/angular_test",
+  "authors": [
+    "Cruel22 <molo4nig@gmail.com>"
+  ],
+  "description": "ngStorage",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularLocalStorage": "ngStorage#^0.3.2"
+  }
+}
