@@ -67,9 +67,8 @@ ang.factory('logic', ['$localStorage', function($localStorage){
             name:qwe,
             id:counter
         }
-        JSON.stringify(input);
-        console.log(input);
-        console.log(typeof(input));
+        stor.storage = stor.storage + JSON.stringify(input);
+        console.log(stor.storage);
        //stor.storage = stor.storage + input;
 		//console.log(localStorage.storage);
         
