@@ -7,15 +7,16 @@ angular.module('myapp', ['ngStorage']);
 
 ang.controller('myCtrl',   function(
     $scope,
-    $localStorage,
-    myfact,
-    $sessionStorage
+    logic
 ){
-	$scope.myfact = myfact;
-	$scope.storage = $localStorage;
-	this.addEvent = function(){
-		myfact.addEvent(this.todo);
-	}
+	$scope.logic = logic;
+	var storage = $scope.storage ;
+	this.add = function () {
+        logic.addEvent(this.todo);
+        this.todo = '';
+        event.preventDefault();
+    }	
+
 	
 });
 
@@ -25,7 +26,7 @@ ang.controller('myCtrl',   function(
 ang.directive('myInput',  function(){
 	// Runs during compile
 	var add = function(value){
-		console.log(scope.localhost)
+		
 	}
 	return {
 		// name: '',
@@ -42,10 +43,10 @@ ang.directive('myInput',  function(){
 		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
 		link: function(scope, element, attrs) {
 			element.bind("keydown keypress", function (event) {
+               
             if(event.which === 13) {
                 scope.$apply(function (){
-                	
-                	console.log(myCtrl);
+                    scope.myCtrl.add();
                 });
 
                 event.preventDefault();
@@ -55,14 +56,26 @@ ang.directive('myInput',  function(){
 	};
 });
 
-ang.factory('myfact',  function(){
+ang.factory('logic', ['$localStorage', function($localStorage){
 	var logic = {};
-
-	logic.addEvent = function (qwe) {
-		$storage.push(qwe);
-		console.log('Add Event function',qwe);
+    var stor= localStorage;
+    var counter = 0 ;
+    
+	logic.addEvent =  function (qwe) {
+       counter ++;
+        var input = {
+            name:qwe,
+            id:counter
+        }
+        JSON.stringify(input);
+        console.log(input);
+        console.log(typeof(input));
+       //stor.storage = stor.storage + input;
+		//console.log(localStorage.storage);
+        
 	};
+	
 
 	return logic;
-})
+}])
 
