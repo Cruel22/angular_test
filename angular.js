@@ -10,70 +10,66 @@ ang.controller('myCtrl',   function(
     logic
 ){
 	$scope.logic = logic;
-	var storage = $scope.storage ;
-	this.add = function () {
+	var storage = $scope.storage;
+    
+	
+    this.get = function() {
+        return logic.getlist();
+    }
+    
+    var	lists = this.get();
+    this.lists = lists;
+    
+    this.add = function () {
         logic.addEvent(this.todo);
         this.todo = '';
+        this.lists = this.get();
         event.preventDefault();
+        
     }	
-
-	
+    
+    
+    console.log('Controller info', Array.isArray(lists), typeof(lists),lists);
 });
 
-	
 
-
-ang.directive('myInput',  function(){
-	// Runs during compile
-	var add = function(value){
-		
-	}
-	return {
-		// name: '',
-		// priority: 1,
-		// terminal: true,
-		// scope: {}, // {} = isolate, true = child, false/undefined = no change
-		// controller: function($scope, $element, $attrs, $transclude) {},
-		// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-		// restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
-		// template: '',
-		// templateUrl: '',
-		// replace: true,
-		// transclude: true,
-		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-		link: function(scope, element, attrs) {
-			element.bind("keydown keypress", function (event) {
-               
-            if(event.which === 13) {
-                scope.$apply(function (){
-                    scope.myCtrl.add();
-                });
-
-                event.preventDefault();
-            }
-        });
-		}
-	};
-});
 
 ang.factory('logic', ['$localStorage', function($localStorage){
 	var logic = {};
-    var stor= localStorage;
-    var counter = 0 ;
+    
+    //$localStorage.$reset();
+    var stor = $localStorage;
+    //console.log('store size',stor.storage.length);
     
 	logic.addEvent =  function (qwe) {
-       counter ++;
-        var input = {
-            name:qwe,
-            id:counter
+            if( typeof stor.storage == "undefined" ){
+            var counter = 0;
         }
-        stor.storage = stor.storage + JSON.stringify(input);
-        console.log(stor.storage);
-       //stor.storage = stor.storage + input;
-		//console.log(localStorage.storage);
+        else {
+            var counter = stor.storage.slice(-2, -1);
+        }
+           counter ++;
+            var input = {
+                name:qwe,
+                status: 'in-progress',
+                id:counter
+            }
+            if( typeof stor.storage == "undefined" ){
+                stor.storage = JSON.stringify(input);
+            }
+            else {
+                stor.storage = stor.storage + ',' + JSON.stringify(input);
+            }
+            //stor.storage = stor.storage + input;
+            //console.log(localStorage.storage);
         
 	};
 	
+    logic.getlist = function (){
+        let result ='[' + stor.storage + ']'; 
+        
+        return JSON.parse(result); 
+    }
 
 	return logic;
 }])
