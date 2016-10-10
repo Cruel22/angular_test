@@ -7,56 +7,101 @@ angular.module('myapp', ['ngStorage']);
 
 ang.controller('myCtrl',   function(
     $scope,
-    $localStorage,
-    myfact,
-    $sessionStorage
+    logic
 ){
-	$scope.myfact = myfact;
-	$scope.storage = $localStorage;
-	this.addEvent = myfact.addEvent(this.todo);
+	$scope.logic = logic;
+	var storage = $scope.storage;
+    
 	
+    this.get = function() {
+        return logic.getlist();
+    }
+    
+    var	lists = this.get();
+    this.lists = lists;
+    
+    this.add = function () {
+        logic.addEvent(this.todo);
+        this.todo = '';
+        this.lists = this.get();
+        event.preventDefault();
+        
+    };
+    this.deleteItem = function(id){
+        logic.deleteItem(id);
+    };
+    
+    
+    
+    console.log('Controller info', Array.isArray(lists), typeof(lists),lists);
 });
 
-	
 
 
-ang.directive('myInput',  function(){
-	// Runs during compile
-	var add = function(value){
-		console.log(scope.localhost)
-	}
-	return {
-		// name: '',
-		// priority: 1,
-		// terminal: true,
-		// scope: {}, // {} = isolate, true = child, false/undefined = no change
-		// controller: function($scope, $element, $attrs, $transclude) {},
-		// require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
-		// restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
-		// template: '',
-		// templateUrl: '',
-		// replace: true,
-		// transclude: true,
-		// compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-		link: function(scope, element, attrs) {
-			element.bind("keydown keypress", function (event) {
-            if(event.which === 13) {
-                scope.$apply(function (){
-                	myCtrl.addEvent(this.todo);
-                });
-
-                event.preventDefault();
-            }
-        });
-		}
-	};
-});
-
-ang.factory('myfact',  function(){
+ang.factory('logic', ['$localStorage', function($localStorage){
 	var logic = {};
-	logic.addEvent = function (todo) {
-		console.log('Add Event function',todo);
-	}
+    
+    //$localStorage.$reset();
+    var stor = $localStorage;
+    //console.log('store size',stor.storage.length);
+    
+	logic.addEvent =  function (qwe) {
+            if( typeof stor.storage == "undefined" ){
+            var counter = 0;
+        }
+        else {
+            var counter = stor.storage.slice(-2, -1);
+        }
+           counter ++;
+            var input = {
+                name:qwe,
+                status: 'in-progress',
+                id:counter
+            }
+            if( typeof stor.storage == "undefined" ){
+                stor.storage = JSON.stringify(input);
+            }
+            else {
+                stor.storage = stor.storage + ',' + JSON.stringify(input);
+            }
+            //stor.storage = stor.storage + input;
+            //console.log(localStorage.storage);
+        
+	};
+	
+    logic.getlist = function (){
+        let result ='[' + stor.storage + ']'; 
+        
+        if(stor.storage === undefined){
+            return [];
+        }
+        else {
+            return JSON.parse(result); 
+        }
+    };
+    
+    logic.deleteItem = function(id){
+        
+        let data = JSON.parse( '[' + stor.storage + ']') ;
+        for(let inc =0; inc <= data.length-1; inc++){
+            if(inc == 0){
+                    if(data[inc].id != id){
+                        stor.storage = JSON.stringify(data[inc]);
+                    }
+                
+            }
+            else{
+                if((data[inc].id !=id)){
+                    stor.storage = stor.storage + ',' + JSON.stringify(data[inc]);
+                }
+               
+            }
+        }
+        console.log(stor.storage);
+       
+       
+    }
+
 	return logic;
-})
+}])
 
