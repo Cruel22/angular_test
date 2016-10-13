@@ -31,18 +31,18 @@ ang.controller('myCtrl',   function(
         logic.deleteItem(id);
     };
     
+}	
+
     
     
     console.log('Controller info', Array.isArray(lists), typeof(lists),lists);
 });
 
-
-
 ang.factory('logic', ['$localStorage', function($localStorage){
 	var logic = {};
     
     //$localStorage.$reset();
-    var stor = $localStorage;
+    //var stor = $localStorage;
     //console.log('store size',stor.storage.length);
     
 	logic.addEvent =  function (qwe) {
