@@ -31,7 +31,7 @@ ang.controller('myCtrl',   function(
         logic.deleteItem(id);
     };
     
-}	
+	
 
     
     
@@ -42,7 +42,7 @@ ang.factory('logic', ['$localStorage', function($localStorage){
 	var logic = {};
     
     //$localStorage.$reset();
-    //var stor = $localStorage;
+    var stor = $localStorage;
     //console.log('store size',stor.storage.length);
     
 	logic.addEvent =  function (qwe) {
