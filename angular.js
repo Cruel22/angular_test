@@ -104,4 +104,3 @@ ang.factory('logic', ['$localStorage', function($localStorage){
 
 	return logic;
 }])
-
