@@ -33,15 +33,13 @@
   padding: 10px 0 10px 10px;
 }
 
-.delete{
-    position: absolute;
-    right: 5px;
-    top:5px;
+.todoList li span{
+    float: right;
     color: #FFF;
     display:none;
 }
 
-.todoList li:hover .delete{
+.todoList li:hover span{
     display:block;
     transform: 0.3s ease;
 }

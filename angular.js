@@ -100,7 +100,10 @@ ang.factory('logic', ['$localStorage', function ($localStorage) {
         }
         console.log('data:' , data , '\n storage:', stor.data);
 
-
+    
+    }
+    logic.renameItem = function(id){
+         let result = '[' + stor.storage + ']';
     }
 
     return logic;
