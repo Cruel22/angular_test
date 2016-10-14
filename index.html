@@ -5,6 +5,7 @@
 
     <meta charset="UTF-8">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="angular.js"></script>
@@ -25,7 +26,7 @@
             </form>
             <div ng-repeat="list in myCtrl.lists">
                 <ul class="todoList">
-                    <li><input type="checkbox" >{{list.id}}  {{list.name}} <span ng-click="myCtrl.deleteItem(list.id)">d</span></li>
+                    <li><input type="checkbox" >{{list.id}}  {{list.name}} <span class="delete fa fa-times"  aria-hidden="true" ng-click="myCtrl.deleteItem(list.id)"></span></li>
                 </ul>
             </div>
         </div>
