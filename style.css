@@ -6,11 +6,7 @@
 	box-shadow: 1px 7px 75px 0px rgba(0,0,0,0.75);
 	padding: 10px;
 }
-.mainForm span{
-	text-align: center;
-	margin: auto 0;
-	display:block;
-}
+
 
 .todoList{
     list-style-type: none;
@@ -21,6 +17,7 @@
 }
 .todoList li {
     transition: 0.3s ease;
+    position: relative;
   background: #3fa46a;
   color: #ffffff;
   font-size: 20px;
@@ -34,4 +31,17 @@
    border-top: 4px solid #FFF;
   border-bottom: 4px solid #FFF;
   padding: 10px 0 10px 10px;
+}
+
+.delete{
+    position: absolute;
+    right: 5px;
+    top:5px;
+    color: #FFF;
+    display:none;
+}
+
+.todoList li:hover .delete{
+    display:block;
+    transform: 0.3s ease;
 }
