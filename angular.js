@@ -13,14 +13,16 @@ ang.controller('myCtrl', function (
     $scope.logic = logic;
     var storage = $scope.storage;
 
-
     this.get = function () {
         return logic.getlist();
     }
 
-    var lists = this.get();
-    this.lists = lists;
-
+  // console.log($scope.status);
+    
+    this.lists = this.get();
+    
+    logic.getByID(2);
+    
     this.add = function () {
         logic.addEvent(this.todo);
         this.todo = '';
@@ -32,18 +34,22 @@ ang.controller('myCtrl', function (
         logic.deleteItem(id);
         this.lists = this.get();
     };
+    
+    this.change = function (id) {
+        logic.change(id);
+        this.lists = this.get();
+    }
 
 
-
-    console.log('Controller info', Array.isArray(lists), typeof (lists), lists);
 });
 
 ang.factory('logic', ['$localStorage', function ($localStorage) {
     var logic = {};
-
+    
     //$localStorage.$reset();
     var stor = $localStorage;
     //console.log('store size',stor.storage.length);
+    
     logic.addEvent = function (qwe) {
         if (typeof stor.storage == "undefined") {
             var counter = 0;
@@ -58,7 +64,7 @@ ang.factory('logic', ['$localStorage', function ($localStorage) {
         counter++;
         let input = {
             name: qwe,
-            status: 'in-progress',
+            status: false,
             id: counter
         }
         if (typeof stor.storage == "undefined") {
@@ -69,6 +75,23 @@ ang.factory('logic', ['$localStorage', function ($localStorage) {
         //stor.storage = stor.storage + input;
         //console.log(localStorage.storage);
 
+    };
+    logic.getByID = function (id){
+        let data = '[' +stor.storage + ']';
+        let result;
+        if(stor.storage!= undefined){
+            data = JSON.parse(data);
+            angular.forEach(data, function(dat,key){
+            if(dat.id==id){
+                //console.log(key);
+                result = key;
+            }
+            
+        });
+        
+        }
+        console.log(result);
+        return result;
     };
     
     logic.getlist = function () {
@@ -93,14 +116,29 @@ ang.factory('logic', ['$localStorage', function ($localStorage) {
             } else {
                 if (data[inc].id != id) {
                     stor.storage = stor.storage + ',' + JSON.stringify(data[inc]);
-                    console.log(data[inc].id , id);
+                    //console.log(data[inc].id , id);
                 }
             }
 
         }
         console.log('data:' , data , '\n storage:', stor.data);
-
-
+    };
+    
+    logic.change = function(id){
+        let info = '[' + stor.storage + ']';
+        info = JSON.parse(info);
+        let keyy = logic.getByID(id);
+        
+        switch(info[keyy].status){
+            case true: info[keyy].status = false; break;
+            case false: info[keyy].status = true; break;
+        }
+        
+        console.log(typeof(info[keyy].status), info[keyy].status)
+       
+        info = JSON.stringify(info);
+        stor.storage = info.slice(1,-1);
+        //console.log(stor.storage);
     }
 
     return logic;
