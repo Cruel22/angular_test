@@ -14,6 +14,7 @@
     background: #3fa46a;
     margin-top: 40px;
     color: #fff;
+    margin-bottom: 30px;
 }
 .todoList li {
     transition: 0.3s ease;
@@ -26,6 +27,7 @@
   border-bottom: 4px solid #3fa46a;
   padding: 10px 0;
   margin: 0 10px;
+  margin-bottom: 7px;
 }
 .todoList li:hover {
    border-top: 4px solid #FFF;
@@ -33,15 +35,21 @@
   padding: 10px 0 10px 10px;
 }
 
-.delete{
-    position: absolute;
-    right: 5px;
-    top:5px;
+.todoList span{
+    float: right;
     color: #FFF;
     display:none;
+    margin-left: 10px;
 }
 
-.todoList li:hover .delete{
+.todoList li:hover span{
     display:block;
     transform: 0.3s ease;
+}
+
+.renameInput{
+    
+    width: 99%;
+    height: 20px;
+    border-radius: 7px;
 }

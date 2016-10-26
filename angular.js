@@ -19,6 +19,8 @@ ang.controller('myCtrl', function (
 
   // console.log($scope.status);
     
+    this.renameVar = true;
+    
     this.lists = this.get();
     
     logic.getByID(2);
@@ -37,6 +39,15 @@ ang.controller('myCtrl', function (
     
     this.change = function (id) {
         logic.change(id);
+        this.lists = this.get();
+    };
+    
+    this.renameShow = function(id){
+        logic.renameShow(id);
+    };
+    
+    this.rename = function(id){
+        logic.rename(id);
         this.lists = this.get();
     }
 
@@ -139,6 +150,17 @@ ang.factory('logic', ['$localStorage', function ($localStorage) {
         info = JSON.stringify(info);
         stor.storage = info.slice(1,-1);
         //console.log(stor.storage);
+    };
+    
+    logic.renameShow = function(id){
+        let v = document.getElementsByName(id)[0];
+        console.log(v);
+        
+    };
+    
+    logic.rename = function(id){
+        let v = document.getElementsByClassName('renameInput');
+        console.log(v);
     }
 
     return logic;
