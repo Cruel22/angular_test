@@ -6,8 +6,64 @@
 	box-shadow: 1px 7px 75px 0px rgba(0,0,0,0.75);
 	padding: 10px;
 }
-.mainForm span{
-	text-align: center;
-	margin: auto 0;
-	display:block;
+
+
+.todoList{
+    list-style-type: none;
+    padding-left: 0;
+    background: #3fa46a;
+    margin-top: 40px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+.todoList li {
+    transition: 0.3s ease;
+    position: relative;
+  background: #3fa46a;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  border-top: 4px solid #3fa46a;
+  border-bottom: 4px solid #3fa46a;
+  padding: 10px 0;
+  margin: 0 10px;
+  margin-bottom: 7px;
+}
+.todoList li:hover {
+   border-top: 4px solid #FFF;
+  border-bottom: 4px solid #FFF;
+  padding: 10px 0 10px 10px;
+}
+
+.todoList span.right{
+    float: right;
+    color: #FFF;
+    display:none;
+    margin-left: 10px;
+}
+
+.todoList li:hover span.right{
+    display:block;
+    transform: 0.3s ease;
+}
+
+.renameInput{
+    padding-left: 5px;
+    width: 69%;
+    height: 20px;
+    border-radius: 7px;
+}
+
+
+
+.todoList .editing .item{
+    display:none;
+}
+
+.renameInput{
+    display: none;
+}
+
+.todoList .editing .renameInput {
+   display: table-cell;
 }
