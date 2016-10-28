@@ -49,7 +49,12 @@ ang.controller('myCtrl', function (
     this.rename = function(id){
         logic.rename(id);
         this.lists = this.get();
-    }
+    };
+    
+     this.toggleEditMode = function(){
+         logic.renameShow();
+      
+  }
 
 
 });
@@ -153,15 +158,15 @@ ang.factory('logic', ['$localStorage', function ($localStorage) {
     };
     
     logic.renameShow = function(id){
-        let v = document.getElementsByName(id)[0];
-        console.log(v);
+        $(event.target).closest('li').toggleClass('editing');
         
     };
     
     logic.rename = function(id){
-        let v = document.getElementsByClassName('renameInput');
-        console.log(v);
+        let item = logic.getByID(id);
+        console.log(item);
     }
 
     return logic;
-}])
+}]);
+

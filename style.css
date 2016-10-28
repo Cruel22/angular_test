@@ -35,21 +35,35 @@
   padding: 10px 0 10px 10px;
 }
 
-.todoList span{
+.todoList span.right{
     float: right;
     color: #FFF;
     display:none;
     margin-left: 10px;
 }
 
-.todoList li:hover span{
+.todoList li:hover span.right{
     display:block;
     transform: 0.3s ease;
 }
 
 .renameInput{
-    
-    width: 99%;
+    padding-left: 5px;
+    width: 69%;
     height: 20px;
     border-radius: 7px;
+}
+
+
+
+.todoList .editing .item{
+    display:none;
+}
+
+.renameInput{
+    display: none;
+}
+
+.todoList .editing .renameInput {
+   display: table-cell;
 }

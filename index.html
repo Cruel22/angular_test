@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="angular.js"></script>
     <script src="bower_components/ngstorage/ngStorage.min.js"></script>
 </head>
@@ -27,11 +28,14 @@
             <div ng-repeat="list in myCtrl.lists">
                 <ul class="todoList">
                     <li>
-                        <input type="checkbox" ng-checked="list.status" ng-click="myCtrl.change(list.id)">{{list.status}} {{statuss}} {{list.id}} {{list.name}} <span class="delete fa fa-times" aria-hidden="true" ng-click="myCtrl.deleteItem(list.id)"></span> <span class="fa fa-pencil" aria-hidden="true" ng-click="myCtrl.renameShow(list.id)"></span> </li>
+                        <input type="checkbox" ng-checked="list.status" ng-click="myCtrl.change(list.id)"><span class="item">{{list.name}}</span> 
+                         <input class="renameInput form-control" value="{{list.name}}" type="text" >
+                        <span class="delete fa fa-times right" aria-hidden="true" ng-click="myCtrl.deleteItem(list.id)"></span> <span class="fa fa-pencil right" aria-hidden="true" ng-click="myCtrl.toggleEditMode()"></span>
+                    </li>
+
                 </ul>
 
             </div>
-            <input class="renameInput form-control" type="text" ng-model="myCtrl.renameInput" ng-show="myCtrl.renameVar" name={{list.id}}>
         </div>
     </div>
 
